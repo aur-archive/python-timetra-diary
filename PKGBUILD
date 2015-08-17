@@ -1,0 +1,32 @@
+# Maintainer: Andrey Mikhaylenko <neithere at gmail dot com>
+# Contributor: Moritz Lipp <mlq@pwmt.org>
+_python=python
+_distname=timetra.diary
+pkgname=$_python-timetra-diary
+pkgver=0.2.0
+pkgrel=2
+pkgdesc="Diary and Time Tracker with YAML backend + CLI frontend"
+arch=(any)
+url="http://github.com/neithere/timetra.diary"
+license=('LGPL3')
+depends=(
+  'python-argh>=0.24'
+  'python-blessings>=1.5.1'
+  'python-confu>=0.0.1'
+  'python-monk>=0.11.2'
+  'python-prettytable>=0.6.1'
+  'python-dateutil>=2.1'
+  'python-yaml>=3.10'
+)
+optdepends=(
+  'python-urwid: experimental curses-based TUI'
+  'python-argcomplete: bash completion'
+)
+makedepends=('python-distribute')
+source=("http://pypi.python.org/packages/source/${_distname:0:1}/$_distname/$_distname-$pkgver.tar.gz")
+md5sums=('ffba7b8ede474d718d62da3ad995b9de')
+
+package() {
+  cd "$srcdir/$_distname-$pkgver"
+  $_python setup.py install --root="$pkgdir/" --optimize=1
+}
